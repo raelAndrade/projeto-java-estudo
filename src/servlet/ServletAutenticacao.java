@@ -21,6 +21,17 @@ public class ServletAutenticacao extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		if(Boolean.parseBoolean(request.getParameter("deslogar"))) {
+			
+			HttpServletRequest req = (HttpServletRequest) request;
+			HttpSession session = req.getSession();
+			session.invalidate();
+			
+			response.sendRedirect("../index.jsp");
+			
+		}
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
