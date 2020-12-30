@@ -15,7 +15,7 @@
 
 	<h2>Upload de files</h2>
 	
-	<input type="file" id="file" name="file" onchange="uploadFile();" />
+	<input type="file" id="file" name="fileUpload" onchange="uploadFile();" />
 	<img alt="Imagem" src="" id="target" width="200" height="200">
 	
 </body>
