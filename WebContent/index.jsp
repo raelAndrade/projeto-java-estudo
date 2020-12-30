@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,6 +16,15 @@
 		</tr>
 		<tr>
 			<td><a href="pages/acessoAoSistema.jsp">Acessar Sistemas</a></td>
+		</tr>
+		<tr>
+			<td><a href="pages/paginaPai.jsp">Load jQuery</a></td>
+		</tr>
+		<tr>
+			<td><a href="pages/progressbar.jsp">Progress Bar</a></td>
+		</tr>
+		<tr>
+			<td><a href="pages/upload.jsp">Upload</a></td>
 		</tr>
 		<tr>
 			<td><a href="pages/servletAutenticacao?deslogar=true">Deslogar</a></td>

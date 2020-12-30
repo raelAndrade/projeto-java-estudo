@@ -3,11 +3,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Load jQuery - Página Filha</title>
 </head>
 <body>
 
-	<h3>Página acessada somente após a autenticação </h3>
-	
+	<h2>Está página está sendo carregada com load jQuery em ajax</h2>	
+
 </body>
 </html>
