@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,12 +17,30 @@
 <body>
 
 	<h2>Upload de files</h2>
+	<form enctype="multipart/form-data">
+		<input type="file" id="file" name="fileUpload" onchange="uploadFile();" />
+		<img alt="Imagem" id="target" width="200" height="200">
+	</form>
 	
-	<input type="file" id="file" name="fileUpload" onchange="uploadFile();" />
-	<img alt="Imagem" src="" id="target" width="200" height="200">
+	<br />
+	<br />
 	
-</body>
-
+	<a href="fileUpload?acao=carregar">Carregar imagens</a>
+	
+	<br />
+	<br />
+	
+	<table>
+		<c:forEach var="user" items="${listaUserImagem }">
+			<tr>
+				<td>${user.id }</td>
+				<td>${user.login }</td>
+				<td><a target="_blank" href="fileUpload?acao=download&iduser=${user.id }">Download Imagem</a></td>
+				
+			</tr>
+		</c:forEach>
+	</table>
+	
 <script type="text/javascript">
 
 	function uploadFile(){
@@ -57,5 +78,7 @@
 	}
 
 </script>
+</body>
+
 
 </html>

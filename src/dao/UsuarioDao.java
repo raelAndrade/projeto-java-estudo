@@ -2,9 +2,13 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import connection.SingleConnection;
+import model.User;
 
 public class UsuarioDao {
 	
@@ -14,13 +18,83 @@ public class UsuarioDao {
 		connection = SingleConnection.getConnection();
 	}
 	
-	public void gravarImagem(String imagem) throws SQLException {
+	public void gravarImagem(String imagem) {
+		try {
+			
+			// String sql = "INSERT INTO usuario (fotobase64miniatura) VALUES (?);";
+			
+			String sql = "INSERT INTO usuario("
+					+ "login, "
+					+ "senha, "
+					+ "nome, "
+					+ "cep, "
+					+ "rua, "
+					+ "bairro, "
+					+ "cidade, "
+					+ "estado, "
+					+ "ibge, "
+					+ "fotobase64, "
+					+ "contenttype, "
+					+ "curriculobase64, "
+					+ "contenttypecurriculo, "
+					+ "fotobase64miniatura, "
+					+ "ativo, "
+					+ "sexo, "
+					+ "perfil) "
+					+ "VALUES (null, null, null, null, null, null, null, null, null, null, null, null, null, ?, false, null, null);";
+			
+			PreparedStatement insertImagem = connection.prepareStatement(sql);
+			insertImagem.setString(1, imagem);
+			insertImagem.execute();
+		} catch (Exception e) {
+			e.printStackTrace();
+			try {
+				connection.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
+	}
+	
+	public List<User> getUsuarios() throws Exception{
+		List<User> users = new ArrayList<User>();
 		
-		String sql = "insert into usuario (imagem) values (?);";
+		String sql = "select * from usuario;";
+		PreparedStatement statement = connection.prepareStatement(sql);
+		ResultSet resultSet = statement.executeQuery();
 		
-		PreparedStatement insertImagem = connection.prepareStatement(sql);
-		insertImagem.setString(1, imagem);
-		insertImagem.execute();
+		while(resultSet.next()) {
+			
+			User user = new User();
+			user.setId(resultSet.getInt("id"));
+			user.setLogin(resultSet.getString("login"));
+			user.setSenha(resultSet.getString("senha"));
+			user.setImagem(resultSet.getString("fotobase64miniatura"));
+			
+			users.add(user);
+		}
+		
+		return users;
+	}
+
+	public String buscaImagem(String iduser) {
+		
+		try {
+			String sql = "select fotobase64miniatura from usuario where id = ?;";
+			PreparedStatement statement;
+			statement = connection.prepareStatement(sql);
+			statement.setInt(1, Integer.parseInt(iduser));
+			
+			ResultSet resultSet = statement.executeQuery();
+			
+			while(resultSet.next()) {
+				return resultSet.getString("fotobase64miniatura");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 	
 	/*public void salvar(Usuario usuario) {

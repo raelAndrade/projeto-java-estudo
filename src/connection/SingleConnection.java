@@ -11,7 +11,7 @@ import java.sql.DriverManager;
  */
 public class SingleConnection {
 
-	private static String url = "jdbc:postgresql://localhost:5432/curso-jsp?autoReconnect=true";
+	private static String url = "jdbc:postgresql://localhost:5432/cursojsp?autoReconnect=true";
 	private static String user = "postgres";
 	private static String password = "admin";
 	
